@@ -1,6 +1,6 @@
 package org.bible.utils
 
-import org.bible.handlefiles.Schemas.Verse
+import org.bible.handlefiles.Schemas._
 
 object RenderVerses {
 
@@ -25,6 +25,34 @@ object RenderVerses {
     }
 
     // Return the accumulated verses as a single string
+    result.toString().trim
+  }
+
+  def renderVersesJSON(versesWithTitles: List[(Int, String, VerseJSON)]): String = {
+    val result = new StringBuilder
+    var currentChapterTitle: String = ""
+    var currentChapterNumber: Int = -1
+
+    versesWithTitles.foreach { case (chapterNumber, chapterTitle, verse) =>
+      if (chapterTitle != currentChapterTitle) {
+        if (result.nonEmpty) result.append("\n\n") // Separate chapters
+        result.append(s"$chapterTitle\n") // Append chapter title
+        currentChapterTitle = chapterTitle
+        currentChapterNumber = chapterNumber
+      }
+
+      if (verse.isNewParagraph && result.nonEmpty) {
+        result.append("\n\n") // For paragraph break
+      }
+
+      // Display the chapter number for verse 1, otherwise display verse number
+      if (verse.verseNumber == 1) {
+        result.append(s"$chapterNumber ${verse.text.replace("\"", "")} ")
+      } else {
+        result.append(s"${verse.verseNumber} ${verse.text.replace("\"", "")} ")
+      }
+    }
+
     result.toString().trim
   }
 

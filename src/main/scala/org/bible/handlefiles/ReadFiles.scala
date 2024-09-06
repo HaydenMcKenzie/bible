@@ -1,6 +1,9 @@
 package org.bible.handlefiles
 
-import org.bible.handlefiles.Schemas.Verse
+import org.bible.handlefiles.Schemas.{Bible, BibleWrapper, Verse}
+import org.json4s._
+import org.json4s.native.JsonMethods._
+
 import scala.io.Source
 
 object ReadFiles {
@@ -21,6 +24,14 @@ object ReadFiles {
     }.toList
     source.close()
     verses
+  }
+
+  def readJSON(filename: String): Bible = {
+    implicit val formats: Formats = DefaultFormats
+    val source = scala.io.Source.fromFile(filename)
+    val json = parse(source.mkString)
+    source.close()
+    json.extract[BibleWrapper].bible
   }
 
 }
