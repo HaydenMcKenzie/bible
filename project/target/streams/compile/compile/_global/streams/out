@@ -1,0 +1,16 @@
+[error] C:\Users\Hayden\IdeaProjects\bible\project\Build.scala:3:14: object scalajs is not a member of package scala
+[error] import scala.scalajs.sbtplugin.ScalaJSPlugin
+[error]              ^
+[error] C:\Users\Hayden\IdeaProjects\bible\project\Build.scala:4:14: object scalajs is not a member of package scala
+[error] import scala.scalajs.sbtplugin.ScalaJSPlugin.autoImport._
+[error]              ^
+[error] C:\Users\Hayden\IdeaProjects\bible\project\Build.scala:6:26: type Build is not a member of package sbt
+[error] object Build extends sbt.Build {
+[error]                          ^
+[error] C:\Users\Hayden\IdeaProjects\bible\project\Build.scala:8:19: not found: value crossProject
+[error]   lazy val root = crossProject.crossType(CrossType.Full)(jsSettings, jvmSettings)
+[error]                   ^
+[error] C:\Users\Hayden\IdeaProjects\bible\project\Build.scala:8:42: not found: value CrossType
+[error]   lazy val root = crossProject.crossType(CrossType.Full)(jsSettings, jvmSettings)
+[error]                                          ^
+[error] 5 errors found

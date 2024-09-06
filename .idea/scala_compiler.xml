@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaCompilerConfiguration">
-    <profile name="sbt 1" modules="Bible,bible" />
+    <profile name="sbt 1" modules="bible" />
+    <profile name="sbt 2" modules="Bible">
+      <plugins>
+        <plugin path="C:\Users\Hayden\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\org\scala-js\scalajs-compiler_2.13.12\1.13.0\scalajs-compiler_2.13.12-1.13.0.jar" />
+      </plugins>
+    </profile>
   </component>
 </project>
