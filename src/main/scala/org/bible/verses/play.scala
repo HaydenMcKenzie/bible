@@ -7,14 +7,16 @@ object play extends App {
   case class VerseJSON(verseNumber: Int, text: String, isNewParagraph: Boolean)
   case class Chapter(chapterNumber: Int, chapterTitle: String, verses: List[VerseJSON])
   case class Bible(book: String, chapters: List[Chapter])
-  case class BibleWrapper(bible: Bible)
 
+  // Update readJSON to handle the new structure
   def readJSON(filename: String): Bible = {
     implicit val formats: Formats = DefaultFormats
     val source = scala.io.Source.fromFile(filename)
     val json = parse(source.mkString)
     source.close()
-    json.extract[BibleWrapper].bible // Extract the "bible" field from the wrapper
+
+    val bibleJson = (json \ "genesisBook").extract[Bible] // Extract the "genesisBook" field as Bible
+    bibleJson
   }
 
   def renderVersesJSON(versesWithTitles: List[(Int, String, VerseJSON)]): String = {
@@ -84,7 +86,7 @@ object play extends App {
     }
   }
 
-  val filename = "data/bible.json"
+  val filename = "data/genesisBook.json"
   val bible = readJSON(filename)
 
   // Example usage
